@@ -28,6 +28,12 @@ export default function HomePage() {
 
   const team2Wins = matches.length - team1Wins;
 
+  const handleClear = () => {
+    setTeam1(null);
+    setTeam2(null);
+    setSelectingFor(1);
+  };
+
   const handleTeamClick = (team: Team) => {
     if (selectingFor === 1) {
       if (team.id === team2?.id) return;
@@ -97,6 +103,11 @@ export default function HomePage() {
           )}
         </div>
       </div>
+
+      {/* Clear button */}
+      {(team1 || team2) && (
+        <button className="clear-btn" onClick={handleClear}>Clear</button>
+      )}
 
       {/* Selecting indicator */}
       <p className="selecting-hint">

@@ -1,4 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&display=swap');
+
+@font-face {
+  font-family: 'Hitmarker Condensed';
+  src: url('./assets/HitmarkerCondensed-Bold.woff2') format('woff2'),
+       url('./assets/HitmarkerCondensed-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Hitmarker Condensed';
+  src: url('./assets/HitmarkerCondensed-Black.woff2') format('woff2'),
+       url('./assets/HitmarkerCondensed-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+}
 
 * {
   margin: 0;
@@ -24,7 +40,7 @@ body {
 }
 
 h1, h2, h3 {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Hitmarker Condensed', sans-serif;
 }
 
 /* ── HOME PAGE ── */
@@ -45,7 +61,7 @@ h1, h2, h3 {
   color: var(--text-muted);
   padding: 8px 16px;
   border-radius: 6px;
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Hitmarker Condensed', sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -63,6 +79,28 @@ h1, h2, h3 {
   background: var(--surface2);
   border-color: #92C83E;
   color: #92C83E;
+}
+
+.clear-btn {
+  align-self: flex-end;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-family: 'Hitmarker Condensed', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-top: -16px;
+}
+
+.clear-btn:hover {
+  color: #ff4d4d;
+  border-color: #ff4d4d55;
 }
 
 /* ── SELECTOR ── */
@@ -102,7 +140,7 @@ h1, h2, h3 {
 }
 
 .selector-slot.filled span {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Hitmarker Condensed', sans-serif;
   font-size: 1.2rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -111,7 +149,7 @@ h1, h2, h3 {
 
 .slot-placeholder {
   color: var(--text-muted);
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Hitmarker Condensed', sans-serif;
   font-size: 1rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -119,7 +157,7 @@ h1, h2, h3 {
 }
 
 .vs-badge {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Hitmarker Condensed', sans-serif;
   font-size: 1.8rem;
   font-weight: 900;
   color: var(--text-muted);
@@ -176,7 +214,7 @@ h1, h2, h3 {
 }
 
 .team-card-abbr {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Hitmarker Condensed', sans-serif;
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -241,7 +279,7 @@ h1, h2, h3 {
 }
 
 .h2h-team-name {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Hitmarker Condensed', sans-serif;
   font-size: 1.1rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -250,7 +288,7 @@ h1, h2, h3 {
 }
 
 .h2h-wins {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Hitmarker Condensed', sans-serif;
   font-size: 3rem;
   font-weight: 900;
   line-height: 1;
@@ -273,7 +311,7 @@ h1, h2, h3 {
 }
 
 .h2h-total {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Hitmarker Condensed', sans-serif;
   font-size: 2rem;
   font-weight: 700;
   color: var(--text);
@@ -305,7 +343,7 @@ h1, h2, h3 {
 .h2h-pct-row {
   display: flex;
   justify-content: space-between;
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Hitmarker Condensed', sans-serif;
   font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -334,7 +372,7 @@ h1, h2, h3 {
   padding: 48px;
   text-align: center;
   color: var(--text-muted);
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Hitmarker Condensed', sans-serif;
   font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -372,7 +410,7 @@ h1, h2, h3 {
 }
 
 .match-event-name {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Hitmarker Condensed', sans-serif;
   font-size: 1rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -386,7 +424,7 @@ h1, h2, h3 {
 }
 
 .match-game-tag {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Hitmarker Condensed', sans-serif;
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -417,7 +455,7 @@ h1, h2, h3 {
 }
 
 .match-team-abbr {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Hitmarker Condensed', sans-serif;
   font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -425,7 +463,7 @@ h1, h2, h3 {
 }
 
 .match-scoreline {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Hitmarker Condensed', sans-serif;
   font-size: 1.4rem;
   font-weight: 900;
   line-height: 1;
@@ -445,7 +483,7 @@ h1, h2, h3 {
 }
 
 .match-winner-tag {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Hitmarker Condensed', sans-serif;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -481,7 +519,7 @@ h1, h2, h3 {
   color: var(--text-muted);
   padding: 8px 16px;
   border-radius: 8px;
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Hitmarker Condensed', sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -545,7 +583,7 @@ h1, h2, h3 {
 }
 
 .match-header-team-name {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Hitmarker Condensed', sans-serif;
   font-size: 1.1rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -553,7 +591,7 @@ h1, h2, h3 {
 }
 
 .match-header-team-score {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Hitmarker Condensed', sans-serif;
   font-size: 3.5rem;
   font-weight: 900;
   line-height: 1;
@@ -568,7 +606,7 @@ h1, h2, h3 {
 }
 
 .match-header-scoreline {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Hitmarker Condensed', sans-serif;
   font-size: 3rem;
   font-weight: 900;
   line-height: 1;
@@ -583,7 +621,7 @@ h1, h2, h3 {
 }
 
 .match-header-event {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Hitmarker Condensed', sans-serif;
   font-size: 1rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -616,7 +654,7 @@ h1, h2, h3 {
   border-bottom: 2px solid transparent;
   color: var(--text-muted);
   padding: 10px 20px;
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Hitmarker Condensed', sans-serif;
   font-size: 0.95rem;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -674,7 +712,7 @@ h1, h2, h3 {
 }
 
 .map-card-mode {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Hitmarker Condensed', sans-serif;
   font-size: 1rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -705,7 +743,7 @@ h1, h2, h3 {
 }
 
 .map-card-abbr {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Hitmarker Condensed', sans-serif;
   font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -713,14 +751,14 @@ h1, h2, h3 {
 }
 
 .map-card-score {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Hitmarker Condensed', sans-serif;
   font-size: 1.8rem;
   font-weight: 900;
   line-height: 1;
 }
 
 .map-card-w {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Hitmarker Condensed', sans-serif;
   font-size: 0.7rem;
   font-weight: 700;
   color: #92C83E;
