@@ -18,7 +18,9 @@ export default function HomePage() {
     : teams.filter((t) => t.seasons.includes(seasonFilter as 2025 | 2026));
 
   const matches = team1 && team2
-    ? getMatchesByTeams(team1.id, team2.id)
+    ? getMatchesByTeams(team1.id, team2.id).filter(
+        (m) => seasonFilter === 'all' || m.season === seasonFilter
+      )
     : [];
 
   const team1Wins = matches.filter(
