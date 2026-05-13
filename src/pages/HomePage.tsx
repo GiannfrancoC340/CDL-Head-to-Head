@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { Team } from '../types';
 import { teams } from '../data/teams';
-import { getMatchesByTeams } from '../data/matches';
+import { getMatchesByTeams, isSameFranchise, getLinkedTeamId } from '../data/matches';
 import MatchList from '../components/MatchList';
 import H2HBar from '../components/H2HBar';
 
@@ -23,12 +23,16 @@ export default function HomePage() {
       )
     : [];
 
+  const t1Ids = team1 ? [team1.id, getLinkedTeamId(team1.id)].filter(Boolean) as string[] : [];
+
   const team1Wins = matches.filter(
-    (m) => (m.winner === 'team1' && m.team1Id === team1?.id) ||
-            (m.winner === 'team2' && m.team2Id === team1?.id)
+    (m) => (m.winner === 'team1' && t1Ids.includes(m.team1Id)) ||
+            (m.winner === 'team2' && t1Ids.includes(m.team2Id))
   ).length;
 
   const team2Wins = matches.length - team1Wins;
+
+  const sameFranchise = !!(team1 && team2 && isSameFranchise(team1.id, team2.id));
 
   const handleClear = () => {
     setTeam1(null);
@@ -149,18 +153,31 @@ export default function HomePage() {
       {/* H2H Results */}
       {team1 && team2 && (
         <div className="h2h-section">
-          <H2HBar
-            team1={team1}
-            team2={team2}
-            team1Wins={team1Wins}
-            team2Wins={team2Wins}
-            totalMatches={matches.length}
-          />
-          <MatchList
-            matches={matches}
-            team1={team1}
-            team2={team2}
-          />
+          {sameFranchise ? (
+            <div className="same-franchise-notice">
+              {(() => {
+                const bo6Team = team1.seasons.includes(2025) ? team1 : team2;
+                const bo7Team = team1.seasons.includes(2025) ? team2 : team1;
+                return <><span>{bo6Team.name}</span> rebranded to <span>{bo7Team.name}</span> — same franchise, different season.</>;
+              })()}
+            </div>
+          ) : (
+            <>
+              <H2HBar
+                team1={team1}
+                team2={team2}
+                team1Wins={team1Wins}
+                team2Wins={team2Wins}
+                totalMatches={matches.length}
+                seasonFilter={seasonFilter}
+              />
+              <MatchList
+                matches={matches}
+                team1={team1}
+                team2={team2}
+              />
+            </>
+          )}
         </div>
       )}
     </div>

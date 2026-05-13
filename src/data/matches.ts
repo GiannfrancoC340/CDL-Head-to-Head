@@ -2371,12 +2371,30 @@ export const matches: Match[] = [
   },
 ];
 
-export const getMatchesByTeams = (team1Id: string, team2Id: string): Match[] =>
-  matches.filter(
+// Franchise rebrand pairs — same org, different name across seasons
+const REBRANDS: Record<string, string> = {
+  atl:   'fzv',  fzv:  'atl',
+  lvf:   'ryd',  ryd:  'lvf',
+  lagm:  'par',  par:  'lagm',
+  min25: 'g2mn', g2mn: 'min25',
+  tor25: 'tkoi', tkoi: 'tor25',
+};
+
+export const getLinkedTeamId = (teamId: string): string | undefined =>
+  REBRANDS[teamId];
+
+export const isSameFranchise = (id1: string, id2: string): boolean =>
+  REBRANDS[id1] === id2;
+
+export const getMatchesByTeams = (team1Id: string, team2Id: string): Match[] => {
+  const t1 = [team1Id, REBRANDS[team1Id]].filter(Boolean) as string[];
+  const t2 = [team2Id, REBRANDS[team2Id]].filter(Boolean) as string[];
+  return matches.filter(
     (m) =>
-      (m.team1Id === team1Id && m.team2Id === team2Id) ||
-      (m.team1Id === team2Id && m.team2Id === team1Id)
+      (t1.includes(m.team1Id) && t2.includes(m.team2Id)) ||
+      (t1.includes(m.team2Id) && t2.includes(m.team1Id))
   );
+};
 
 export const getMatchById = (id: string): Match | undefined =>
   matches.find((m) => m.id === id);

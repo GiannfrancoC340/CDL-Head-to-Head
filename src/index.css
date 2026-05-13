@@ -226,6 +226,24 @@ h1, h2, h3 {
   color: var(--text);
 }
 
+.same-franchise-notice {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+  color: var(--text-muted);
+  font-family: 'Hitmarker Condensed', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.same-franchise-notice span {
+  color: var(--text);
+}
+
 /* ── H2H SECTION ── */
 .h2h-section {
   display: flex;

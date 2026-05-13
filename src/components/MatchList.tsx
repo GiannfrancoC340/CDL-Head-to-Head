@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import type { Match, Team } from '../types';
+import { getLinkedTeamId } from '../data/matches';
+import { teams } from '../data/teams';
 
 interface Props {
   matches: Match[];
@@ -22,13 +24,19 @@ export default function MatchList({ matches, team1, team2 }: Props) {
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 
-  const getTeamScore = (match: Match, team: Team) => {
-    return match.team1Id === team.id ? match.scoreTeam1 : match.scoreTeam2;
+  // Include rebranded team IDs so cross-season matches resolve correctly
+  const t1Ids = [team1.id, getLinkedTeamId(team1.id)].filter(Boolean) as string[];
+  const t2Ids = [team2.id, getLinkedTeamId(team2.id)].filter(Boolean) as string[];
+
+  const getTeamScore = (match: Match, teamIds: string[]) => {
+    if (teamIds.includes(match.team1Id)) return match.scoreTeam1;
+    if (teamIds.includes(match.team2Id)) return match.scoreTeam2;
+    return 0;
   };
 
-  const didTeamWin = (match: Match, team: Team) => {
-    return (match.winner === 'team1' && match.team1Id === team.id) ||
-           (match.winner === 'team2' && match.team2Id === team.id);
+  const didTeamWin = (match: Match, teamIds: string[]) => {
+    return (match.winner === 'team1' && teamIds.includes(match.team1Id)) ||
+           (match.winner === 'team2' && teamIds.includes(match.team2Id));
   };
 
   const formatDate = (dateStr: string) => {
@@ -44,10 +52,15 @@ export default function MatchList({ matches, team1, team2 }: Props) {
     <div className="match-list">
       <h2 className="match-list-title">Match History</h2>
       {sorted.map((match) => {
-        const t1Won = didTeamWin(match, team1);
-        const winner = t1Won ? team1 : team2;
-        const t1Score = getTeamScore(match, team1);
-        const t2Score = getTeamScore(match, team2);
+        // Resolve the actual team objects that played in this specific match
+        const t1Won = didTeamWin(match, t1Ids);
+        const t1Score = getTeamScore(match, t1Ids);
+        const t2Score = getTeamScore(match, t2Ids);
+
+        // Use the team that actually played (e.g. FZV instead of ATL for BO7 matches)
+        const actualLeft  = teams.find(t => t.id === (t1Ids.includes(match.team1Id) ? match.team1Id : match.team2Id)) ?? team1;
+        const actualRight = teams.find(t => t.id === (t1Ids.includes(match.team1Id) ? match.team2Id : match.team1Id)) ?? team2;
+        const winner = t1Won ? actualLeft : actualRight;
 
         return (
           <div
@@ -71,11 +84,8 @@ export default function MatchList({ matches, team1, team2 }: Props) {
 
             {/* Score */}
             <div className="match-score">
-              <span
-                className="match-team-abbr"
-                style={{ color: team1.primaryColor }}
-              >
-                {team1.abbreviation}
+              <span className="match-team-abbr" style={{ color: actualLeft.primaryColor }}>
+                {actualLeft.abbreviation}
               </span>
               <span className={`match-scoreline ${t1Won ? 'win' : 'loss'}`}>
                 {t1Score}
@@ -84,11 +94,8 @@ export default function MatchList({ matches, team1, team2 }: Props) {
               <span className={`match-scoreline ${!t1Won ? 'win' : 'loss'}`}>
                 {t2Score}
               </span>
-              <span
-                className="match-team-abbr"
-                style={{ color: team2.primaryColor }}
-              >
-                {team2.abbreviation}
+              <span className="match-team-abbr" style={{ color: actualRight.primaryColor }}>
+                {actualRight.abbreviation}
               </span>
             </div>
 
